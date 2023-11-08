@@ -1,5 +1,5 @@
 import './App.css'
-import ReactFlow, { Background, ConnectionLineType, ConnectionMode, Controls, MiniMap } from 'reactflow'
+import ReactFlow, { Background, ConnectionLineType, ConnectionMode, Controls } from 'reactflow'
 
 import 'reactflow/dist/style.css';
 import VitaminNode from './components/VitaminNode';
