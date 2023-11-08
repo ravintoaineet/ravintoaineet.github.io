@@ -1,5 +1,5 @@
 import './App.css'
-import ReactFlow, { Background, ConnectionLineType, ConnectionMode, Controls } from 'reactflow'
+import ReactFlow, { Background, ConnectionLineType, ConnectionMode, Controls, MiniMap } from 'reactflow'
 
 import 'reactflow/dist/style.css';
 import VitaminNode from './components/VitaminNode';
@@ -75,11 +75,13 @@ function App() {
   ];
 
   return (
-    <div style={{width:"100%", height:"97vh"}}>
+    <div style={{width:"100vw", height:"100vh"}}>
       <ReactFlow fitView proOptions={{hideAttribution: true}}
           nodesConnectable={false}
-          edgesFocusable={false}
           nodesFocusable={false}
+          edgesFocusable={false}
+          elementsSelectable={false}
+          translateExtent={[[-2000, -1000],[2000, 1000]]}
 
           nodeTypes={{vitamin:VitaminNode, subgroup:GroupNode, mineral:MineralNode}}
           defaultEdgeOptions={{animated:true, style:{stroke:"black"}}}
