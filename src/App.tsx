@@ -1,28 +1,52 @@
 import './App.css'
-import ReactFlow, { Background, ConnectionLineType, ConnectionMode, Controls } from 'reactflow'
+import ReactFlow, { Background, ConnectionLineType, ConnectionMode, Controls, Node, ReactFlowInstance, useStoreApi } from 'reactflow'
 
 import 'reactflow/dist/style.css';
-import GroupNode from './nodes/GroupNode';
 import NodeModal from './NodeModal';
 import { useEffect, useState } from 'react';
-import { connections, nodes } from './nodes';
-import RootNode from './nodes/RootNode';
-
-const nodeTypes = {root:RootNode, subgroup:GroupNode};
+import { connections, nodeTypes, nodes } from './nodes';
 
 function App() {
+  const [instance, setInstance] = useState<ReactFlowInstance | undefined>(undefined);
   const [modal, setModal] = useState({shown:false, data:null as any});
-  const closeModal = () => setModal({shown:false, data:null});
+  const closeModal = () => {
+    setModal({shown:false, data:null});
+    window.history.back();
+  }
+  const openModal = (node: Node<any, string | undefined>) => {
+    if (node.id == "message") {
+      instance!.setNodes(nodes => nodes.filter(b => b.id !== node.id));
+      localStorage.setItem("message", "false");
+      return;
+    }
+    setModal({shown:true, data:node.data});
+    window.history.pushState({id:node.id}, node.data.name, "?" + node.id);
+  }
 
   useEffect(() => {
-    const listener = (e: KeyboardEvent) => {
+    const keyListener = (e: KeyboardEvent) => {
       if (e.key == "Escape") closeModal();
     };
-    document.addEventListener('keydown', listener);
-    return () => document.removeEventListener("keydown", listener);
+    const popListener = (e: PopStateEvent) => {
+      if (e.state != null) {
+        if (instance == null)
+          return;
+        const node = instance.getNode(e.state.id);
+        if (node != null) {
+          setModal({shown:true, data:node.data})
+          return;
+        } else console.log("Node with id " + e.state.id + " not found");
+      }
+      setModal({shown:false, data:null});
+    };
+    document.addEventListener('keydown', keyListener);
+    window.addEventListener('popstate', popListener);
+    return () => {
+      document.removeEventListener("keydown", keyListener);
+      window.removeEventListener("popstate", popListener);
+    }
   });
 
-  
   return (<>
     <div style={{width:"100vw", height:"100svh"}}>
       <ReactFlow fitView proOptions={{hideAttribution: true}}
@@ -32,12 +56,21 @@ function App() {
           elementsSelectable={false}
           nodesDraggable={false}
           translateExtent={[[-2000, -1000], [2000, 1000]]}
-          onNodeClick={(_, node) => setModal({shown:true, data:node.data})}
+          onNodeClick={(_, node) => openModal(node)}
           onNodeContextMenu={(e, node) => {
             e.preventDefault();
-            setModal({shown:true, data:node.data});
+            instance?.setCenter(node.position!.x, node.position!.y , { duration: 800 });
           }}
           onPaneContextMenu={(e) => e.preventDefault()}
+          onInit={flow => {
+            setInstance(flow);
+
+            if (!window.location.search)
+              return;
+            const node = flow.getNode(window.location.search.substring(1));
+            if (node != null) setModal({shown:true, data:node.data});
+            else window.location.href = window.location.origin;
+          }}
           zoomOnPinch={true}
           zoomOnDoubleClick={false}
 
@@ -46,7 +79,7 @@ function App() {
           connectionLineType={ConnectionLineType.Straight}
           connectionMode={ConnectionMode.Loose}
           nodeOrigin={[0.5,0.5]}
-          nodes={nodes} edges={connections}>
+          defaultNodes={nodes} edges={connections}>
         <Background color="#aaa" gap={16} />
         <Controls showInteractive={false}/>
       </ReactFlow>

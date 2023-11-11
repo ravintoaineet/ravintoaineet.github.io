@@ -1,4 +1,17 @@
+import GroupNode from "./nodes/GroupNode";
+import MessageNode from "./nodes/MessageNode";
+import RootNode from "./nodes/RootNode";
+
+export const nodeTypes = {root:RootNode, message:MessageNode, subgroup:GroupNode};
+
 export const nodes = [
+    {
+        id: 'message',
+        type: 'message',
+        data: { width: 350, header:"Hei! 👋", text: <>
+            Kaikki alakohdat ovat painettavia ja niiden sisällä on lisätietoa ravintoaineista
+        </> }, position: { x: -850, y: -325 },
+    },
     {type:"root", id:'ravintoaineet', position:{x:-75,y:25}, data:{
         name:'Ravintoaineet',
         description: <>
@@ -22,10 +35,19 @@ export const nodes = [
         Proteiineilla eli valkuaisaineilla on iso rooli elimistön rakenteessa ja toiminnassa. Proteiinin tehtäviin kuuluu myös energian tuottaminen.
         Jokaisesta solustasi löytyy erilaisia proteiineja, ja jokaisella on oma tehtävänsä. Eniten proteiinia löytyy lihaksista.
         Valkuaisainepitoisen ruoan syöminen ja liikunta lisäävät lihasmassaa.
-        <p/>Ruokvalion lähteisiin kuuluu liha, broileri, kala, kananmunat, maitotuotteet, palkokasvit (kuten pavut ja linssit), pähkinät ja siemenet.
+        <p/>🥩 Liha 🐔 Broileri 🐟 Kala 🥚 Kananmunat 🥛 Maitotuotteet 🌱 Palkokasvit (Pavut & Linssit) 🥜 Pähkinät 🌽 Siemenet.
     </>}},
 
-    {type:"subgroup", id:'rasvat', position:{x:-800,y:-25}, data:{name:'Rasvat', icon:'🍔'}},
+    {type:"subgroup", id:'rasvat', position:{x:-800,y:-50}, data:{name:'Rasvat', icon:'🍔'}},
+    {type:"subgroup", id:'tyydyttymättömät', position:{x:-1050,y:-100}, data:{name:'Tyydyttymättömät', icon:'🥑', description:<>
+        Tyydyttymättömät rasvat eli pehmeät rasvat sisältävät hiiliketjuilla kaksoissidoksia.
+        <p/>Pehmeät rasvat ovat jaettu kahteen pääryhmään: Yksityydyttymättömät ja monityydyttymättömät.
+        Monityydyttymättömissä rasvoissa on monta kaksoissidosta
+    </>}},
+    {type:"subgroup", id:'tyydyttyneet', position:{x:-1025,y:0}, data:{name:'Tyydyttyneet', icon:'🍟', description:<>
+        Tyydyttyneet rasvat eli kovat rasvat eivät sisällä kaksoissidoksia hiilivetyketjuissaan.
+        <p/>Kovat rasvat ovat vähemmän suositeltuja, koska ne voivat lisätä LDL-kolesterolia, mikä mahdollisesti aiheuttaa sydänsairauksia, koska verisuonet tukkiutuvat siitä.
+    </>}},
 
     {type:"subgroup", id:'hiilihydraatit', position:{x:-550,y:200}, data:{name:'Hiilihydraatit', icon:'🌾'}},
     {type:"subgroup", id:'ravintokuitu', position:{x:-300,y:300}, data:{name:'Ravintokuitu', icon:'🍞'}},
@@ -58,7 +80,8 @@ export const nodes = [
         
     </>}},
     {type:"subgroup", id:'fruktoosi', position:{x:-925,y:150}, data:{name:'Fruktoosi', icon:'🍎', formula:<>C<sub>6</sub>H<sub>12</sub>O<sub>6</sub></>, description:<>
-        
+        Fruktoosia eli hedelmäsokeria esiintyy hunajassa ja kaikissa hedelmissä.
+        <p/>Ihminen maistaa fruktoosin noin tuplasti makeampana kuin sakkaroosin, joka on koostumus fruktoosista ja glukoosista.
     </>}},
 
 
@@ -101,7 +124,7 @@ export const nodes = [
     {type:"subgroup", id:'sinkki', position:{x:720,y:360}, data:{name:'Sinkki', icon:"Zn", group:"Mikrokivennäisaine"}},
     {type:"subgroup", id:'jodi', position:{x:740,y:240}, data:{name:'Jodi', icon:"I", group:"Mikrokivennäisaine"}},
     {type:"subgroup", id:'seleeni', position:{x:640,y:120}, data:{name:'Seleeni', icon:"Se", group:"Mikrokivennäisaine"}},
-];
+].filter(a => a.id != "message" || localStorage.getItem("message") != "false");
 
 export const connections = [
     {id:'root-energia', type:"straight", source:'ravintoaineet', target:'energiaravintoaineet'},
@@ -109,6 +132,8 @@ export const connections = [
     {id:'suoja-proteiinit', type:"straight", style:{opacity:"75%"}, source:'suojaravintoaineet', target:'proteiinit'},
 
     {id:'energia-rasvat', type:"straight", source:'energiaravintoaineet', target:'rasvat'},
+    {id:'rasvat-tyydyttyneet', type:"straight", source:'rasvat', target:'tyydyttyneet'},
+    {id:'rasvat-tyydyttymättömät', type:"straight", source:'rasvat', target:'tyydyttymättömät'},
 
     {id:'energia-hiilihydraatit', type:"straight", source:'energiaravintoaineet', target:'hiilihydraatit'},
     {id:'energia-tärkkelys', type:"straight", source:'hiilihydraatit', target:'tärkkelys'},

@@ -17,7 +17,7 @@ const Container = styled.div`
 }
 `;
 
-function GroupNode({data}: any) {
+function RootNode({data}: any) {
     return <Container>
       <span style={{fontWeight:700}}>{data.name}</span>
       <Handle type="source" position={Position.Bottom} style={{width:"1px"}} />
@@ -25,4 +25,4 @@ function GroupNode({data}: any) {
     </Container>
 }
 
-export default GroupNode;
+export default RootNode;

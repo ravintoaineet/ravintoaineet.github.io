@@ -96,16 +96,22 @@ function NodeModal({modalData, close}: Props) {
     const data = modalData.data;
     const content = data.description != null ?
         data.description : "Ei lisättyä tietoa . . . . ";
+    const mobile = window.innerWidth <= 800;
+    const titleSize = mobile && (data.name.length > 14 || (data.group != null && data.group.length > 14)) ?
+        26 : 32;
+
     return <>
         <BackgroundBlur onMouseDown={close}/>
-        <Container style={{position:"absolute", display:"flex", flexDirection:"column", top:"20vh", left:"10vw", width:"80vw", gap:24 }}>
-            <div onMouseDown={e => {
-                    if (e.currentTarget == e.target) close();
-                }} style={{display:"flex", gap:32}}>
+        <Container style={{
+            position:"absolute", display:"flex", flexDirection:"column", gap:24,
+            top:mobile ? "48px" : "20vh", left:mobile ? "5vw" : "10vw", width:mobile ? "90vw" : "80vw"
+        }}>
+            <div style={{display:"flex", gap:32}} onMouseDown={e => {
+                if (e.currentTarget == e.target) close();
+            }}>
                 <Box style={{
-                    minWidth:"5%",
-                    width: "max-content",
-                    maxWidth:"70%",
+                    width: mobile ? "85vw" : "max-content",
+                    maxWidth:mobile ? "85%" : "70%",
                 }}>
                     <div style={{display:"flex"}}>
                         {data.icon == null ||
@@ -115,14 +121,14 @@ function NodeModal({modalData, close}: Props) {
                         }
                         { data.group != null ?
                             <div style={{display:"flex", flexDirection:"column", marginLeft:"1.5rem"}}>
-                                <span style={{fontSize:32, marginTop:15, fontWeight:700, color:data.color}}>{data.name}</span>
-                                <span style={{fontSize:30, color:"#6B7280"}}>{data.group}</span>
+                                <span style={{fontSize:titleSize, marginTop:15, fontWeight:700, color:data.color}}>{data.name}</span>
+                                <span style={{fontSize:titleSize - 2, color:"#6B7280"}}>{data.group}</span>
                             </div>
-                        : <h1 style={{color:data.color, marginLeft:"1.5rem", lineHeight:"3.5rem"}}>{data.name}</h1>}
+                        : <h1 style={{fontSize:titleSize, color:data.color, marginLeft:"1.5rem", lineHeight:"3.5rem"}}>{data.name}</h1>}
                     </div>
-                    <CloseButton onClick={close}>X</CloseButton>
+                    { mobile || <CloseButton onClick={close}>X</CloseButton> }
                 </Box>
-                {data.formula == null ||
+                {(data.formula == null || mobile) ||
                     <Box><h1 style={{color:data.color, marginLeft:"1.5rem", lineHeight:"3.5rem"}}>{data.formula}</h1></Box>
                 }
             </div>
