@@ -1,5 +1,5 @@
 import './App.css'
-import ReactFlow, { Background, ConnectionLineType, ConnectionMode, Controls, Node, ReactFlowInstance, useStoreApi } from 'reactflow'
+import ReactFlow, { Background, ConnectionLineType, ConnectionMode, Controls, Node, ReactFlowInstance } from 'reactflow'
 
 import 'reactflow/dist/style.css';
 import NodeModal from './NodeModal';
