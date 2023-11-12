@@ -37,7 +37,7 @@ function GroupNode({data}: any) {
         </div>
       </div>
 
-      <Handle type="source" position={Position.Bottom} style={{width:"1px"}} />
+      <Handle type="source" position={Position.Bottom} style={{cursor:"pointer", width:"1px"}} />
       
     </Container>
 }

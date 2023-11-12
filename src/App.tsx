@@ -49,7 +49,7 @@ function App() {
 
   return (<>
     <div style={{width:"100vw", height:"100svh"}}>
-      <ReactFlow fitView proOptions={{hideAttribution: true}}
+      <ReactFlow fitView fitViewOptions={{padding:0.04}} proOptions={{hideAttribution: true}}
           nodesConnectable={false}
           nodesFocusable={false}
           edgesFocusable={false}
@@ -79,7 +79,7 @@ function App() {
           connectionLineType={ConnectionLineType.Straight}
           connectionMode={ConnectionMode.Loose}
           nodeOrigin={[0.5,0.5]}
-          defaultNodes={nodes} edges={connections}>
+          nodes={nodes} edges={connections}>
         <Background color="#aaa" gap={16} />
         <Controls showInteractive={false}/>
       </ReactFlow>

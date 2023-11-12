@@ -22,7 +22,7 @@ export const nodes = [
         </>
     }},
 
-    {type:"subgroup", id:'energiaravintoaineet', position:{x:-450,y:0}, data:{
+    {type:"subgroup", id:'energiaravintoaineet', position:{x:-400,y:-50}, data:{
         name:'Energiaravintoaineet', icon:'⚡', description:<>
             Energiaravintoaineet ovat aineita, jotka antavat keholle energiaa toteuttaa eri kehon toimintoja.
             <p/>Vaikka energiaravintoaineet ovat ollenaisia energianlähteitä niin täytyy muistaa, että vitamiinit ja kivennäisaineet vaikuttavat energian aineenvaihduntaan.
@@ -31,29 +31,37 @@ export const nodes = [
     }},
 
 
-    {type:"subgroup", id:'proteiinit', position:{x:-400,y:-175}, data:{name:'Proteiinit', icon:'💪', description:<>
+    {type:"subgroup", id:'proteiinit', position:{x:-350,y:-200}, data:{name:'Proteiinit', icon:'💪', description:<>
         Proteiineilla eli valkuaisaineilla on iso rooli elimistön rakenteessa ja toiminnassa. Proteiinin tehtäviin kuuluu myös energian tuottaminen.
         Jokaisesta solustasi löytyy erilaisia proteiineja, ja jokaisella on oma tehtävänsä. Eniten proteiinia löytyy lihaksista.
         Valkuaisainepitoisen ruoan syöminen ja liikunta lisäävät lihasmassaa.
         <p/>🥩 Liha 🐔 Broileri 🐟 Kala 🥚 Kananmunat 🥛 Maitotuotteet 🌱 Palkokasvit (Pavut & Linssit) 🥜 Pähkinät 🌽 Siemenet.
     </>}},
 
-    {type:"subgroup", id:'rasvat', position:{x:-800,y:-50}, data:{name:'Rasvat', icon:'🍔'}},
-    {type:"subgroup", id:'tyydyttymättömät', position:{x:-1050,y:-100}, data:{name:'Tyydyttymättömät', icon:'🥑', description:<>
+    {type:"subgroup", id:'rasvat', position:{x:-750,y:-100}, data:{name:'Rasvat', icon:'🍔'}},
+    {type:"subgroup", id:'tyydyttymättömät', position:{x:-1000,y:-150}, data:{name:'Tyydyttymättömät', icon:'🥑', description:<>
         Tyydyttymättömät rasvat eli pehmeät rasvat sisältävät hiiliketjuilla kaksoissidoksia.
         <p/>Pehmeät rasvat ovat jaettu kahteen pääryhmään: Yksityydyttymättömät ja monityydyttymättömät.
         Monityydyttymättömissä rasvoissa on monta kaksoissidosta
     </>}},
-    {type:"subgroup", id:'tyydyttyneet', position:{x:-1025,y:0}, data:{name:'Tyydyttyneet', icon:'🍟', description:<>
+    {type:"subgroup", id:'tyydyttyneet', position:{x:-975,y:-50}, data:{name:'Tyydyttyneet', icon:'🍟', description:<>
         Tyydyttyneet rasvat eli kovat rasvat eivät sisällä kaksoissidoksia hiilivetyketjuissaan.
         <p/>Kovat rasvat ovat vähemmän suositeltuja, koska ne voivat lisätä LDL-kolesterolia, mikä mahdollisesti aiheuttaa sydänsairauksia, koska verisuonet tukkiutuvat siitä.
     </>}},
 
-    {type:"subgroup", id:'hiilihydraatit', position:{x:-550,y:200}, data:{name:'Hiilihydraatit', icon:'🌾'}},
-    {type:"subgroup", id:'ravintokuitu', position:{x:-300,y:300}, data:{name:'Ravintokuitu', icon:'🍞'}},
-    {type:"subgroup", id:'tärkkelys', position:{x:-600,y:350}, data:{name:'Tärkkelys', icon:'🌽'}},
-    {type:"subgroup", id:'sokerit', position:{x:-850,y:250}, data:{name:'Sokerit', icon:'🍰'}},
-    {type:"subgroup", id:'glukoosi', position:{x:-1100,y:250}, data:{name:'Glukoosi', icon:'🌞', formula:<>C<sub>6</sub>H<sub>12</sub>O<sub>6</sub></>, description:<>
+    {type:"subgroup", id:'hiilihydraatit', position:{x:-450,y:125}, data:{name:'Hiilihydraatit', icon:'🌾'}},
+    {type:"subgroup", id:'ravintokuitu', position:{x:-225,y:225}, data:{name:'Ravintokuitu', icon:'🍞'}},
+    {type:"subgroup", id:'tärkkelys', position:{x:-500,y:250}, data:{name:'Tärkkelys', icon:'🌽'}},
+    {type:"subgroup", id:'sokerit', position:{x:-750,y:225}, data:{name:'Sokerit', icon:'🍰'}},
+    
+    {type:"subgroup", id:'ksylitoli', position:{x:-825,y:325}, data:{name:'Ksylitoli', icon:'🦷', formula:<>C<sub>5</sub>H<sub>12</sub>O<sub>5</sub></>, description:<>
+        
+    </>}},
+    {type:"subgroup", id:'fruktoosi', position:{x:-800,y:120}, data:{name:'Fruktoosi', icon:'🍎', formula:<>C<sub>6</sub>H<sub>12</sub>O<sub>6</sub></>, description:<>
+        Fruktoosia eli hedelmäsokeria esiintyy hunajassa ja kaikissa hedelmissä.
+        <p/>Ihminen maistaa fruktoosin noin tuplasti makeampana kuin sakkaroosin, joka on koostumus fruktoosista ja glukoosista.
+    </>}},
+    {type:"subgroup", id:'glukoosi', position:{x:-1025,y:200}, data:{name:'Glukoosi', icon:'🌞', formula:<>C<sub>6</sub>H<sub>12</sub>O<sub>6</sub></>, description:<>
         Glukoosi eli rypäle- tai panimosokeri, on yksi yleisin sokeri. Glukoosia muodostuu fotosynteesissä!
         <p/>
         <div style={{whiteSpace:"pre", display:"flex", flexDirection:"row", gap:20}}>
@@ -67,7 +75,7 @@ export const nodes = [
             </div>
         </div>
     </>}},
-    {type:"subgroup", id:'laktoosi', position:{x:-1200,y:375}, data:{
+    {type:"subgroup", id:'laktoosi', position:{x:-1100,y:350}, data:{
         name:'Laktoosi', icon:'🥛', formula:<>C<sub>12</sub>H<sub>22</sub>O<sub>11</sub></>, description:<>
             Laktoosi eli maitosokeri löytyy maidosta. Lehmänmaidossa sitä esiintyy 4,8% ja äidinmaidossa jopa 7%.
             <br/>Laktoosi on disakkaridi eli se muodostuu kahdesta yksinkertaisesta sokerimolekyylistä, gluukosista ja galaktoosista.
@@ -75,15 +83,6 @@ export const nodes = [
             Kuitenkin tavallisesti laktaasi häviää kehosta poikasten kasvaessa, mutta ihmiset ovat kehittyneet pysyvästi sietämään laktoosia.
             Tämän takia voit käyttää maitotuotteita päivittäin. 
     </>}},
-    
-    {type:"subgroup", id:'ksylitoli', position:{x:-900,y:350}, data:{name:'Ksylitoli', icon:'🦷', formula:<>C<sub>5</sub>H<sub>12</sub>O<sub>5</sub></>, description:<>
-        
-    </>}},
-    {type:"subgroup", id:'fruktoosi', position:{x:-925,y:150}, data:{name:'Fruktoosi', icon:'🍎', formula:<>C<sub>6</sub>H<sub>12</sub>O<sub>6</sub></>, description:<>
-        Fruktoosia eli hedelmäsokeria esiintyy hunajassa ja kaikissa hedelmissä.
-        <p/>Ihminen maistaa fruktoosin noin tuplasti makeampana kuin sakkaroosin, joka on koostumus fruktoosista ja glukoosista.
-    </>}},
-
 
     {type:"subgroup", id:'suojaravintoaineet', position:{x:300,y:0}, data:{name:'Suojaravintoaineet', icon:'⚔️'}},
 
@@ -116,7 +115,7 @@ export const nodes = [
     {type:"subgroup", id:'kalsium', position:{x:165,y:140}, data:{
         name:'Kalsium', icon:"Ca", group:"Makrokivennäisaine",
         description:"Kalsium on yleisin kivennäisaine elimistössä. Ihminen tarvitsee kalsiumia luuston ja hampaiden hyvinvointiin sekä aineenvaihduntaan"}},
-    {type:"subgroup", id:'magnesium', position:{x:65,y:240}, data:{
+    {type:"subgroup", id:'magnesium', position:{x:65,y:260}, data:{
         name:'Magnesium', icon:"Mg", group:"Makrokivennäisaine"}},
     {type:"subgroup", id:'natriumkalium', position:{x:120,y:370}, data:{name:'Natrium & Kalium', icon:"NaK", group:"Makrokivennäisaine"}},
 
