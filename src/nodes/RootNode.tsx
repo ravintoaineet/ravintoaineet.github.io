@@ -10,6 +10,7 @@ const Container = styled.div`
   border: solid 1px #000;
   border-radius: 24px;
   transition: 0.1s ease;
+  letter-spacing: 2px;
 }
 
 &:hover {

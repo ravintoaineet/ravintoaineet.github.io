@@ -2,6 +2,8 @@ import GroupNode from "./nodes/GroupNode";
 import MessageNode from "./nodes/MessageNode";
 import RootNode from "./nodes/RootNode";
 
+import tofu from "/tofu.png";
+
 export const nodeTypes = {root:RootNode, message:MessageNode, subgroup:GroupNode};
 
 export const nodes = [
@@ -35,9 +37,9 @@ export const nodes = [
         Proteiineilla eli valkuaisaineilla on iso rooli elimistön rakenteessa ja toiminnassa. Proteiinin tehtäviin kuuluu myös energian tuottaminen.
         Jokaisesta solustasi löytyy erilaisia proteiineja, ja jokaisella on oma tehtävänsä. Eniten proteiinia löytyy lihaksista.
         Valkuaisainepitoisen ruoan syöminen ja liikunta lisäävät lihasmassaa.
-        <p/>🥩 Liha 🐔 Broileri 🐟 Kala 🥚 Kananmunat 🥛 Maitotuotteet 🌱 Palkokasvit (Pavut & Linssit) 🥜 Pähkinät 🌽 Siemenet.
-    </>}},
-
+    </>, sources: [
+        "🥩 Liha", "🐔 Broileri", "🐟 Kala", "🥚 Kananmunat", "🥛 Maitotuotteet", "🌱 Palkokasvit (Pavut & Linssit)", "🥜 Pähkinät", "🌽 Siemenet"
+    ]}},
     {type:"subgroup", id:'rasvat', position:{x:-750,y:-100}, data:{name:'Rasvat', icon:'🍔'}},
     {type:"subgroup", id:'tyydyttymättömät', position:{x:-1000,y:-150}, data:{name:'Tyydyttymättömät', icon:'🥑', description:<>
         Tyydyttymättömät rasvat eli pehmeät rasvat sisältävät hiiliketjuilla kaksoissidoksia.
@@ -95,13 +97,11 @@ export const nodes = [
     {type:"subgroup", id:'d', position:{x:80,y:-420}, data:{name:'D-vitamiini', group:"Rasvaliukoinen", icon:"🐟", color:"#ff1188", description:<>
         D-vitamiini on rasvaliukoinen vitamiiniryhmä, johon kuuluu luonnollisesti D<sub>1</sub>, D<sub>2</sub>, D<sub>3</sub>, D<sub>4</sub> ja D<sub>5</sub>
         <p/>D-vitamiini vaikuttaa luun aineenvaihduntaan, sydänlihaksen toimintaan, versisuonien suojeluun, vastustuskykyyn, suolistoon ja lihasten toimintaan.
-        <p/>🌞 Aurinko 🍣 Lohi 🥚 Kananmuna 🍄 Sienet
-    </>}},
+    </>, sources: ["🌞 Aurinko", "🍣 Lohi", "🥚 Kananmuna", "🍄 Sienet"]}},
     {type:"subgroup", id:'e', position:{x:280,y:-420}, data:{name:'E-vitamiini', group:"Rasvaliukoinen", icon:"🌻", color:"#ff11ff", formula:<>C<sub>29</sub>H<sub>50</sub>O<sub>2</sub></>, description:<>
         E-vitamiini ryhmä koostuu kahdeksasta aineesta, joista ihmiskeho käyttää pelkästään α-tokoferolia.
         <p/>Se vaikuttaa elimistön rasvahapposynteesiin, vaikuttaa verihiutaleiden toimintaan, säätelee veren kolesterolitasoa, edistää verenkiertoa ja parantaa soluvälitteistä immuunivastetta.
-        <p/>🌻 Voikukkaöljy ja -siemenet 🥜 Manteli 🥚 Kananmuna 🥑 Avokado 🌿 Pinaatti
-    </>}},
+    </>, sources:["🌻 Voikukkaöljy ja -siemenet", "🥜 Manteli", "🥚 Kananmuna", "🥑 Avokado", "🌿 Pinaatti"]}},
     {type:"subgroup", id:'k', position:{x:480,y:-420}, data:{name:'K-vitamiini', group:"Rasvaliukoinen", icon:"🥬", color:"#1111ff"}},
 
 
@@ -114,7 +114,12 @@ export const nodes = [
 
     {type:"subgroup", id:'kalsium', position:{x:165,y:140}, data:{
         name:'Kalsium', icon:"Ca", group:"Makrokivennäisaine",
-        description:"Kalsium on yleisin kivennäisaine elimistössä. Ihminen tarvitsee kalsiumia luuston ja hampaiden hyvinvointiin sekä aineenvaihduntaan"}},
+        description:"Kalsium on yleisin kivennäisaine elimistössä. Ihminen tarvitsee kalsiumia luuston ja hampaiden hyvinvointiin sekä aineenvaihduntaan",
+        sources:[
+            <><img src={tofu} style={{height:44, position:"absolute", transform:"translate(-6px, -10px)"}}></img>
+                <span style={{whiteSpace:"pre"}}>       Tofu</span>
+            </>, "🥛 Maitotuotteet", "Soijapavut", "🌿 Pinaatti"
+        ]}},
     {type:"subgroup", id:'magnesium', position:{x:65,y:260}, data:{
         name:'Magnesium', icon:"Mg", group:"Makrokivennäisaine"}},
     {type:"subgroup", id:'natriumkalium', position:{x:120,y:370}, data:{name:'Natrium & Kalium', icon:"NaK", group:"Makrokivennäisaine"}},

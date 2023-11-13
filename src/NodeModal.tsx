@@ -111,20 +111,20 @@ function NodeModal({modalData, close}: Props) {
             }}>
                 <Box style={{
                     width: mobile ? "85vw" : "max-content",
-                    maxWidth:mobile ? "85%" : "70%",
+                    maxWidth:mobile ? "100%" : "70%",
                 }}>
                     <div style={{display:"flex"}}>
                         {data.icon == null ||
-                            <div style={{userSelect:"none", display:"flex",fontSize:"2.5rem", justifyContent:"center",alignItems:"center",borderRadius:"9999px",width:"6rem",height:"6rem",backgroundColor:"#F3F4F6"}}>
+                            <div style={{userSelect:"none", display:"flex",fontSize:"2.5rem", justifyContent:"center", alignItems:"center",borderRadius:"9999px",width:"6rem",height:"6rem",backgroundColor:"#F3F4F6"}}>
                                 {data.icon}
                             </div>
                         }
                         { data.group != null ?
                             <div style={{display:"flex", flexDirection:"column", marginLeft:"1.5rem"}}>
-                                <span style={{fontSize:titleSize, marginTop:15, fontWeight:700, color:data.color}}>{data.name}</span>
-                                <span style={{fontSize:titleSize - 2, color:"#6B7280"}}>{data.group}</span>
+                                <span style={{fontSize:titleSize, marginTop:15, letterSpacing:1, fontWeight:700, color:data.color}}>{data.name}</span>
+                                <span style={{fontSize:titleSize - 2, letterSpacing:1, color:"#6B7280"}}>{data.group}</span>
                             </div>
-                        : <h1 style={{fontSize:titleSize, color:data.color, marginLeft:"1.5rem", lineHeight:"3.5rem"}}>{data.name}</h1>}
+                        : <h1 style={{fontSize:titleSize, letterSpacing:1, color:data.color, marginLeft:"1.5rem", lineHeight:"3.5rem"}}>{data.name}</h1>}
                     </div>
                     { mobile || <CloseButton onClick={close}>X</CloseButton> }
                 </Box>
@@ -135,15 +135,25 @@ function NodeModal({modalData, close}: Props) {
             <Box style={{
                 paddingTop: "1.5rem",
                 paddingBottom: "1.5rem",
-                paddingLeft: "3rem",
-                paddingRight: "3rem",
+                paddingLeft: "24px",
+                paddingRight: "24px",
                 fontSize: "20px"
             }}>
-                <div style={{display:"flex"}}>
-                    <span style={{lineHeight:"1.75rem"}}>
+                <div style={{padding:16}}>
+                    <span style={{lineHeight:"28px"}}>
                         {content}
                     </span>
                 </div>
+                {data.sources == null || <div style={{
+                    display:"flex", flexWrap: "wrap", gap: mobile ? 8 : 24, marginTop:"8px", padding:8, paddingTop:16, paddingBottom:16,
+                    boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px", borderRadius:16, justifyContent:"center"
+                }}>
+                    {data.sources.map((source: string) => (
+                        <div key={source} style={{background:"#fff", boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px", borderRadius:10, padding:8}}>
+                            <span style={{letterSpacing:mobile ? 0 : 1}}>{source}</span>
+                        </div>
+                    ))}
+                </div> }
             </Box>
         </Container>
     </>
