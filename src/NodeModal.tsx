@@ -58,11 +58,8 @@ const Box = styled.div`
 
 const CloseButton = styled.button`
 & {
-    position: absolute;
     width: 40px; 
     height: 40px;
-    right: 0;
-    top: 0;
 
     user-select: none;
     cursor: pointer;
@@ -104,14 +101,16 @@ function NodeModal({modalData, close}: Props) {
         <BackgroundBlur onMouseDown={close}/>
         <Container style={{
             position:"absolute", display:"flex", flexDirection:"column", gap:24,
-            top:mobile ? "48px" : "20vh", left:mobile ? "5vw" : "10vw", width:mobile ? "90vw" : "80vw"
-        }}>
+            top:0, paddingTop:mobile ? "48px" : "20vh", paddingBottom:32, left:mobile ? "5vw" : "10vw", width:mobile ? "90vw" : "80vw"
+        }} onMouseDown={e => {
+            if (e.currentTarget == e.target) close();
+        }} >
             <div style={{display:"flex", gap:32}} onMouseDown={e => {
                 if (e.currentTarget == e.target) close();
             }}>
                 <Box style={{
-                    width: mobile ? "85vw" : "max-content",
-                    maxWidth:mobile ? "100%" : "70%",
+                    width: mobile ? "100%" : "max-content",
+                    maxWidth:mobile ? "85%" : "70%",
                 }}>
                     <div style={{display:"flex"}}>
                         {data.icon == null ||
@@ -124,19 +123,16 @@ function NodeModal({modalData, close}: Props) {
                                 <span style={{fontSize:titleSize, marginTop:15, letterSpacing:1, fontWeight:700, color:data.color}}>{data.name}</span>
                                 <span style={{fontSize:titleSize - 2, letterSpacing:1, color:"#6B7280"}}>{data.group}</span>
                             </div>
-                        : <h1 style={{fontSize:titleSize, letterSpacing:1, color:data.color, marginLeft:"1.5rem", lineHeight:"3.5rem"}}>{data.name}</h1>}
+                        : <h1 style={{fontSize:titleSize, letterSpacing:1, color:data.color, marginLeft:"1.5rem", marginTop:"32px"}}>{data.name}</h1>}
                     </div>
-                    { mobile || <CloseButton onClick={close}>X</CloseButton> }
                 </Box>
                 {(data.formula == null || mobile) ||
                     <Box><h1 style={{color:data.color, marginLeft:"1.5rem", lineHeight:"3.5rem"}}>{data.formula}</h1></Box>
                 }
+                { mobile || <CloseButton onClick={close}>X</CloseButton> }
             </div>
             <Box style={{
-                paddingTop: "1.5rem",
-                paddingBottom: "1.5rem",
-                paddingLeft: "24px",
-                paddingRight: "24px",
+                padding: mobile ? "8px" : "24px",
                 fontSize: "20px"
             }}>
                 <div style={{padding:16}}>

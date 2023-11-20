@@ -52,33 +52,41 @@ export const nodes = [
     </>}},
 
     {type:"subgroup", id:'hiilihydraatit', position:{x:-450,y:125}, data:{name:'Hiilihydraatit', icon:'🌾'}},
-    {type:"subgroup", id:'ravintokuitu', position:{x:-225,y:225}, data:{name:'Ravintokuitu', icon:'🍞'}},
-    {type:"subgroup", id:'tärkkelys', position:{x:-500,y:250}, data:{name:'Tärkkelys', icon:'🌽'}},
-    {type:"subgroup", id:'sokerit', position:{x:-750,y:225}, data:{name:'Sokerit', icon:'🍰'}},
+
+    {type:"subgroup", id:'polysakkaridit', position:{x:-400,y:250}, data:{name:'Polysakkaridit', icon:'🥐'}},
+    {type:"subgroup", id:'ravintokuitu', position:{x:-225,y:375}, data:{name:'Ravintokuidut', icon:'🍞', description:<>
+        Ravintokuituja löytyy pääosin kasviperäisistä ruoka-aineista.
+        Keho ei pysty hajottamaan ravintokuituja, mutta kuitu edistää suoliston liikettä ja auttaa ruoan kulkua ruoansulatuskanavassa.
+        <p/>Ravintokuidut on jaettu kahteen pääryhmään:
+        <br/><strong>Liukenevat kuidut</strong> muodostavat geelimäisiä rakenteita koskettaessaan veteen. Ne liukenevat veteen ja voivat auttaa säätelemään verensokeritasoja ja kolesterolitasoja.
+        <br/><strong>Liukenemattomat kuidut</strong> taas eivät liukene veteen ja edistävät suoliston terveyttä. Esim. selluloosa
+    </>, sources:["🍐 Hedelmät", "🥑 Vihannekset", "🍞 Täysjyvävilja", "🥜 Pähkinät", "🌻 Siemenet"]}},
+    {type:"subgroup", id:'tärkkelys', position:{x:-500,y:400}, data:{name:'Tärkkelys', group:<>Polysakkaridi</>, icon:'🌽', formula:<>(C<sub>6</sub>H<sub>10</sub>O<sub>5</sub>)n</>}},
     
-    {type:"subgroup", id:'ksylitoli', position:{x:-825,y:325}, data:{name:'Ksylitoli', icon:'🦷', formula:<>C<sub>5</sub>H<sub>12</sub>O<sub>5</sub></>, description:<>
-        
-    </>}},
-    {type:"subgroup", id:'fruktoosi', position:{x:-800,y:120}, data:{name:'Fruktoosi', icon:'🍎', formula:<>C<sub>6</sub>H<sub>12</sub>O<sub>6</sub></>, description:<>
+    // Glykogeeni?
+
+    {type:"subgroup", id:'monodisakkaridit', position:{x:-750,y:225}, data:{name:'Mono- ja disakkaridit', icon:'🍰'}},
+    {type:"subgroup", id:'fruktoosi', position:{x:-800,y:120}, data:{name:'Fruktoosi', icon:'🍎', group:<>Monosakkaridi</>, formula:<>C<sub>6</sub>H<sub>12</sub>O<sub>6</sub></>, description:<>
         Fruktoosia eli hedelmäsokeria esiintyy hunajassa ja kaikissa hedelmissä.
         <p/>Ihminen maistaa fruktoosin noin tuplasti makeampana kuin sakkaroosin, joka on koostumus fruktoosista ja glukoosista.
     </>}},
-    {type:"subgroup", id:'glukoosi', position:{x:-1025,y:200}, data:{name:'Glukoosi', icon:'🌞', formula:<>C<sub>6</sub>H<sub>12</sub>O<sub>6</sub></>, description:<>
-        Glukoosi eli rypäle- tai panimosokeri, on yksi yleisin sokeri. Glukoosia muodostuu fotosynteesissä!
-        <p/>
-        <div style={{whiteSpace:"pre", display:"flex", flexDirection:"row", gap:20}}>
-            <div style={{display:"flex", flexDirection:"column"}}>
-                <span>6 CO<sub>2</sub> + 6 H<sub>2</sub>O</span>
-                <span>hiilidioksidi + vesi</span>
+    {type:"subgroup", id:'glukoosi', position:{x:-1025,y:200}, data:{
+        name:'Glukoosi', icon:'🌞', group:<>Monosakkaridi</>, formula:<>C<sub>6</sub>H<sub>12</sub>O<sub>6</sub></>, description:<>
+            Glukoosi eli rypäle- tai panimosokeri, on yksi yleisin sokeri. Glukoosia muodostuu fotosynteesissä!
+            <p/>
+            <div style={{whiteSpace:"pre", display:"flex", flexDirection:"row", gap:20}}>
+                <div style={{display:"flex", flexDirection:"column"}}>
+                    <span>6 CO<sub>2</sub> + 6 H<sub>2</sub>O</span>
+                    <span>hiilidioksidi + vesi</span>
+                </div>
+                <div style={{display:"flex", flexDirection:"column"}}>
+                    <span>➡      C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> + 6 O<sub>2</sub></span>
+                    <span>➡      glukoosi + happi</span>
+                </div>
             </div>
-            <div style={{display:"flex", flexDirection:"column"}}>
-                <span>➡      C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> + 6 O<sub>2</sub></span>
-                <span>➡      glukoosi + happi</span>
-            </div>
-        </div>
     </>}},
     {type:"subgroup", id:'laktoosi', position:{x:-1100,y:350}, data:{
-        name:'Laktoosi', icon:'🥛', formula:<>C<sub>12</sub>H<sub>22</sub>O<sub>11</sub></>, description:<>
+        name:'Laktoosi', icon:'🥛', group:<>Disakkaridi</>, formula:<>C<sub>12</sub>H<sub>22</sub>O<sub>11</sub></>, description:<>
             Laktoosi eli maitosokeri löytyy maidosta. Lehmänmaidossa sitä esiintyy 4,8% ja äidinmaidossa jopa 7%.
             <br/>Laktoosi on disakkaridi eli se muodostuu kahdesta yksinkertaisesta sokerimolekyylistä, gluukosista ja galaktoosista.
             <p/><strong>Laktaasi</strong> pilkkoo laktoosin kehossa ja muodostuu takaisin glukoosiksi ja galaktoosiksi, jolloin se voi imeytyä kehoon.
@@ -140,12 +148,13 @@ export const connections = [
     {id:'rasvat-tyydyttymättömät', type:"straight", source:'rasvat', target:'tyydyttymättömät'},
 
     {id:'energia-hiilihydraatit', type:"straight", source:'energiaravintoaineet', target:'hiilihydraatit'},
-    {id:'energia-tärkkelys', type:"straight", source:'hiilihydraatit', target:'tärkkelys'},
-    {id:'energia-ravinto', type:"straight", source:'hiilihydraatit', target:'ravintokuitu'},
-    {id:'energia-sokerit', type:"straight", source:'hiilihydraatit', target:'sokerit'},
-    {id:'sokerit-glukoosi', type:"straight", source:'sokerit', target:'glukoosi'},
-    {id:'sokerit-ksylitoli', type:"straight", source:'sokerit', target:'ksylitoli'},
-    {id:'sokerit-fruktoosi', type:"straight", source:'sokerit', target:'fruktoosi'},
+    {id:'hiilihyd-polysakkaridit', type:"straight", source:'hiilihydraatit', target:'polysakkaridit'},
+    {id:'polysakkaridit-tärkkelys', type:"straight", source:'polysakkaridit', target:'tärkkelys'},
+    {id:'polysakkaridit-ravintokuitu', type:"straight", source:'polysakkaridit', target:'ravintokuitu'},
+
+    {id:'energia-monodisakkaridit', type:"straight", source:'hiilihydraatit', target:'monodisakkaridit'},
+    {id:'sokerit-glukoosi', type:"straight", source:'monodisakkaridit', target:'glukoosi'},
+    {id:'sokerit-fruktoosi', type:"straight", source:'monodisakkaridit', target:'fruktoosi'},
     {id:'glukoosi-laktoosi', type:"straight", source:'glukoosi', target:'laktoosi'},
 
     
