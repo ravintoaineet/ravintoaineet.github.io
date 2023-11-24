@@ -24,15 +24,15 @@ function GroupNode({data}: any) {
     return <Container>
       <div style={{display:"flex"}}>
         {data.icon == null ||
-          <div style={{display:"flex",justifyContent:"center",alignItems:"center",borderRadius:"9999px",width:"3rem",height:"3rem",backgroundColor:"#F3F4F6"}}>
+          <div style={{fontSize:18, display:"flex",justifyContent:"center",alignItems:"center",borderRadius:"100%",width:"48px",height:"48px",backgroundColor:"#F3F4F6"}}>
             {data.icon}
           </div>
         }
         <div style={{display:"flex", flexDirection:"column", marginLeft:data.icon == undefined ? "0" : "0.5rem"}}>
           {data.group != null ? <>
-              <span style={{color:data.color, fontSize:"1.125rem",lineHeight:"1.75rem",fontWeight:700}}>{data.name}</span>
+              <span style={{color:data.color, fontSize:"18px",lineHeight:"28px",fontWeight:700}}>{data.name}</span>
               <span style={{color:"#6B7280"}}>{data.group}</span>
-            </> : <span style={{color:data.color, fontSize:"1.125rem",lineHeight:"3rem",fontWeight:700}}>{data.name}</span>
+            </> : <span style={{color:data.color, fontSize:"18px",lineHeight:"48px",fontWeight:700}}>{data.name}</span>
           }
         </div>
       </div>

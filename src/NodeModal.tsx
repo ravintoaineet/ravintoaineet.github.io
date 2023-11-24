@@ -46,6 +46,7 @@ const Container = styled.div`
 `;
 
 const Box = styled.div`
+& {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     padding-left: 1rem;
@@ -54,6 +55,27 @@ const Box = styled.div`
     border-width: 2px;
     background: #ffffffcc;
     box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.4);
+}
+
+td, th {
+    font-size: 18px;
+    border: 1px solid #777;
+    padding: 3px;
+    padding-left: 8px;
+    padding-right: 8px;
+    text-align: center;
+}
+    
+table {
+    border-collapse: collapse;
+}
+    
+tbody tr:nth-child(odd) {
+    background: #eee;
+}
+caption {
+    font-size: 0.8rem;
+}
 `;
 
 const CloseButton = styled.button`
@@ -96,12 +118,12 @@ function NodeModal({modalData, close}: Props) {
     const mobile = window.innerWidth <= 800;
     const titleSize = mobile && (data.name.length > 14 || (data.group != null && data.group.length > 14)) ?
         26 : 32;
-
+    const adjustForTable = !mobile && data.table != undefined;
     return <>
         <BackgroundBlur onMouseDown={close}/>
         <Container style={{
             position:"absolute", display:"flex", flexDirection:"column", gap:24,
-            top:0, paddingTop:mobile ? "48px" : "20vh", paddingBottom:32, left:mobile ? "5vw" : "10vw", width:mobile ? "90vw" : "80vw"
+            top:0, paddingTop:mobile ? "48px" : "5%", paddingBottom:32, left:mobile ? "5vw" : "10vw", width:mobile ? "90vw" : "80vw"
         }} onMouseDown={e => {
             if (e.currentTarget == e.target) close();
         }} >
@@ -135,10 +157,13 @@ function NodeModal({modalData, close}: Props) {
                 padding: mobile ? "8px" : "24px",
                 fontSize: "20px"
             }}>
-                <div style={{padding:16}}>
-                    <span style={{lineHeight:"28px"}}>
-                        {content}
-                    </span>
+                <div style={{display:"flex", flexDirection:adjustForTable ? "row" : "column", gap: 32}}>
+                    <div style={{padding:16, width:adjustForTable ? "70%" : undefined}}>
+                        <span style={{lineHeight:"28px"}}>
+                            {content}
+                        </span>
+                    </div>
+                    {data.table}
                 </div>
                 {data.sources == null || <div style={{
                     display:"flex", flexWrap: "wrap", gap: mobile ? 8 : 24, marginTop:"8px", padding:8, paddingTop:16, paddingBottom:16,

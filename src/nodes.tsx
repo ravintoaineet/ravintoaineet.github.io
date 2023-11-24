@@ -6,6 +6,27 @@ import tofu from "/tofu.png";
 
 export const nodeTypes = {root:RootNode, message:MessageNode, subgroup:GroupNode};
 
+function SubVitamin(data: {name: React.ReactNode, alt: string, content: any, width?: any, sources: string[]}) {
+    return <div style={{display:"flex", flexDirection:"column", gap:8, width:data.width != undefined ? data.width : "max(290px, 30%)"}}>
+        <div style={{display:"flex", flexDirection:"column", padding:16, borderRadius:"16px", boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px"}}>
+            <div style={{display:"flex", flexDirection:"row", gap:8}}>
+                <span style={{color:"#000", fontSize:"18px", fontWeight:700}}>{data.name}</span>
+                <span style={{color:"#6B7280"}}>{data.alt}</span>
+            </div>
+            <div style={{fontSize:18}}>
+                {data.content}
+            </div>
+        </div>
+        <div style={{display:"flex", flexDirection:"row", fontSize:14, gap:8, justifyContent:"center"}}>
+            {data.sources.map((source: string) => (
+                <div key={source} style={{background:"#fff", boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px", borderRadius:10, padding:4}}>
+                    <span>{source}</span>
+                </div>
+            ))}
+        </div>
+  </div>
+}
+
 export const nodes = [
     {
         id: 'message',
@@ -51,9 +72,16 @@ export const nodes = [
         <p/>Kovat rasvat ovat vähemmän suositeltuja, koska ne voivat lisätä LDL-kolesterolia, mikä mahdollisesti aiheuttaa sydänsairauksia, koska verisuonet tukkiutuvat siitä.
     </>}},
 
-    {type:"subgroup", id:'hiilihydraatit', position:{x:-450,y:125}, data:{name:'Hiilihydraatit', icon:'🌾'}},
+    {type:"subgroup", id:'hiilihydraatit', position:{x:-450,y:125}, data:{name:'Hiilihydraatit', icon:'🌾', description:<>
+        Hiilihydraatit ovat yhdisteitä, jotka koostuvat hiilestä, vedystä ja hapesta. Ne ovat kehon pääenergianlähde.
+        Hiilihydraatit jaetaan yleensä sokereihin, tärkkelykseen ja ravintokuituihin. Kuitenkin kemiallinen jako on mono-, di- ja polysakkaridit.
+    </>}},
 
-    {type:"subgroup", id:'polysakkaridit', position:{x:-400,y:250}, data:{name:'Polysakkaridit', icon:'🥐'}},
+    {type:"subgroup", id:'polysakkaridit', position:{x:-400,y:250}, data:{name:'Polysakkaridit', icon:'🥐', description:<>
+        Polysakkaridit ovat valtavia monosakkaridiketjuja, jotka voivat olla jopa tuhannen monosakkaridin pituisia.
+        <p/>Ne hajotetaan ruoansulatusprosessissa monosakkarideiksi, jotta niitä voidaan käyttää energianlähteenä tai muihin tarpeisiin.
+        Tämä hajotusprosessi kestää kauemmin ketjun pituuden takia, mikä selittää, miksi niiden imeytyminen on hitaampaa verrattuna monosakkarideihin.
+    </>}},
     {type:"subgroup", id:'ravintokuitu', position:{x:-225,y:375}, data:{name:'Ravintokuidut', icon:'🍞', description:<>
         Ravintokuituja löytyy pääosin kasviperäisistä ruoka-aineista.
         Keho ei pysty hajottamaan ravintokuituja, mutta kuitu edistää suoliston liikettä ja auttaa ruoan kulkua ruoansulatuskanavassa.
@@ -65,7 +93,44 @@ export const nodes = [
     
     // Glykogeeni?
 
-    {type:"subgroup", id:'monodisakkaridit', position:{x:-750,y:225}, data:{name:'Mono- ja disakkaridit', icon:'🍰'}},
+    {type:"subgroup", id:'monodisakkaridit', position:{x:-750,y:225}, data:{name:'Mono- ja disakkaridit', icon:'🍰', description:<>
+            Mono- ja disakkaridit ovat niitä sokereita, joita mietit ensimmäisenä, kun kuullet sanan sokeri. Perussokeri on sakkaroosi, joka on disakkaridi.
+            <p/><b>Monosakkaridit</b> ovat yksinkertaisia hiilihydraatteja, jotka koostuvat yhdestä sokeriyksiköstä.
+            <br/><b>Disakkaridit</b> ovat sokerilajeja, jotka koostuvat kahdesta monosakkaridista. Elimistö pilkkoo nämä monosakkarideiksi pystyäkseen hyödyntämään niitä.
+        </>, table: <table><tbody>
+            <tr>
+                <td colSpan={2}><b>Sokereiden suhteellinen makeus</b></td>
+            </tr>
+            <tr>
+                <td>Laktoosi (Maitosokeri)</td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td>Maltoosi (Mallassokeri)</td>
+                <td>30</td>
+            </tr>
+            <tr>
+                <td>Galaktoosi</td>
+                <td>32</td>
+            </tr>
+            <tr>
+                <td>Glukoosi (Rypälesokeri)</td>
+                <td>70</td>
+            </tr>
+            <tr>
+                <td>Sakkaroosi (Ruokosokeri)</td>
+                <td>100</td>
+                </tr>
+            <tr>
+                <td>Ksylitoli (Koivusokeri)</td>
+                <td>100</td>
+            </tr>
+            <tr>
+                <td>Fruktoosi (Hedelmäsokeri)</td>
+                <td>140–175</td>
+            </tr>
+        </tbody></table>
+    }},
     {type:"subgroup", id:'fruktoosi', position:{x:-800,y:120}, data:{name:'Fruktoosi', icon:'🍎', group:<>Monosakkaridi</>, formula:<>C<sub>6</sub>H<sub>12</sub>O<sub>6</sub></>, description:<>
         Fruktoosia eli hedelmäsokeria esiintyy hunajassa ja kaikissa hedelmissä.
         <p/>Ihminen maistaa fruktoosin noin tuplasti makeampana kuin sakkaroosin, joka on koostumus fruktoosista ja glukoosista.
@@ -94,27 +159,62 @@ export const nodes = [
             Tämän takia voit käyttää maitotuotteita päivittäin. 
     </>}},
 
-    {type:"subgroup", id:'suojaravintoaineet', position:{x:300,y:0}, data:{name:'Suojaravintoaineet', icon:'⚔️'}},
+    {type:"subgroup", id:'suojaravintoaineet', position:{x:300,y:0}, data:{name:'Suojaravintoaineet', icon:'⚔️', description:<>
+        Suojaravintoaineet ovat elimistölle välttämättömiä ravintoaineita, joihin kuuluu vitamiinit, hivenaineet ja kivennäisaineet. Aineet tukevat kehon tavallista toimintaa ja terveyttä.
+    </>}},
 
 
-    {type:"subgroup", id:'vitamiinit', position:{x:375,y:-150}, data:{name:'Vitamiinit', icon:'💊'}},
+    {type:"subgroup", id:'vitamiinit', position:{x:375,y:-150}, data:{name:'Vitamiinit', icon:'💊', description:<>
+        Vitamiinit ovat elintärkeitä jokaiselle. Ne osallistuvat monin tavoin elimistön hyvinvointiin. Vitamiineja on monia erilaisia ja ne ryhmitetään rasvaliukoisiin ja vesiliukoisiin.
+    </>}},
 
-    {type:"subgroup", id:'rasvaliukoiset', position:{x:180,y:-300}, data:{name:'Rasvaliukoiset', icon:"🍔"}},
-    {type:"subgroup", id:'a', position:{x:-120,y:-420}, data:{name:'A-vitamiini', group:"Rasvaliukoinen", icon:"🥕", color:"#ff1111",
-        formula:<>C<sub>20</sub>H<sub>30</sub>O</>}},
+    {type:"subgroup", id:'rasvaliukoiset', position:{x:180,y:-300}, data:{name:'Rasvaliukoiset', icon:"🍔", description:<>
+        Rasvaliukoiset vitamiinit liukenevat rasvaan, joten ne varastoituvat rasvakudoksiin ja maksaan pidemmäksi aikaa.
+        <br/>Liiallinen saanti voi olla terveyshaitta.
+    </>}},
+    {type:"subgroup", id:'a', position:{x:-120,y:-420}, data:{name:'A-vitamiini', group:"Rasvaliukoinen", icon:"🥕", color:"#ff1111", formula:<>C<sub>20</sub>H<sub>30</sub>O</>, description:<>
+        A-vitamiini eli retinoli
+    </>}},
     {type:"subgroup", id:'d', position:{x:80,y:-420}, data:{name:'D-vitamiini', group:"Rasvaliukoinen", icon:"🐟", color:"#ff1188", description:<>
-        D-vitamiini on rasvaliukoinen vitamiiniryhmä, johon kuuluu luonnollisesti D<sub>1</sub>, D<sub>2</sub>, D<sub>3</sub>, D<sub>4</sub> ja D<sub>5</sub>
-        <p/>D-vitamiini vaikuttaa luun aineenvaihduntaan, sydänlihaksen toimintaan, versisuonien suojeluun, vastustuskykyyn, suolistoon ja lihasten toimintaan.
-    </>, sources: ["🌞 Aurinko", "🍣 Lohi", "🥚 Kananmuna", "🍄 Sienet"]}},
+        D-vitamiini eli kalsiferoli on rasvaliukoinen vitamiiniryhmä, johon kuuluu luonnollisesti D<sub>1</sub>, D<sub>2</sub>, D<sub>3</sub>, D<sub>4</sub> ja D<sub>5</sub>
+
+        <div style={{display:"flex", flexDirection:"row", flexWrap:"wrap", gap:16, marginTop:16}}>
+        <SubVitamin width="max(290px, min(45%, 450px))" name={<>D<sub>2</sub>-vitamiini</>} alt="ergokalsiferoli" content="Edistää kalsiumin ja fosforin imeytymistä. Tukee luuston terveyttä."
+            sources={["🍄Sienet", "🌾Viljat"]}/>
+        <SubVitamin width="max(290px, min(45%, 450px))" name={<>D<sub>3</sub>-vitamiini</>} alt="kolekalsiferoli" content="Edistää kalsiumin ja fosforin imeytymistä. Parantaa immuniteettia. Positiivisia mielialan vaikutuksia."
+            sources={["☀️Aurinko", "🐟Lohi", "🥛Maitotuotteet", "🥚Kananmuna"]}/>
+        </div>
+    </>}},
     {type:"subgroup", id:'e', position:{x:280,y:-420}, data:{name:'E-vitamiini', group:"Rasvaliukoinen", icon:"🌻", color:"#ff11ff", formula:<>C<sub>29</sub>H<sub>50</sub>O<sub>2</sub></>, description:<>
-        E-vitamiini ryhmä koostuu kahdeksasta aineesta, joista ihmiskeho käyttää pelkästään α-tokoferolia.
-        <p/>Se vaikuttaa elimistön rasvahapposynteesiin, vaikuttaa verihiutaleiden toimintaan, säätelee veren kolesterolitasoa, edistää verenkiertoa ja parantaa soluvälitteistä immuunivastetta.
+        E-vitamiinilla on kaksi pääryhmää tokoferoli ja tokotrienoli, jonka sisällä on eri isomeerejä. Ihmiskeho käyttää pelkästään α-tokoferolia.
+        <p/>E-vitamiini vaikuttaa elimistön rasvahapposynteesiin, verihiutaleiden toimintaan, säätelee veren kolesterolitasoa, edistää verenkiertoa ja parantaa soluvälitteistä immuunivastetta.
     </>, sources:["🌻 Voikukkaöljy ja -siemenet", "🥜 Manteli", "🥚 Kananmuna", "🥑 Avokado", "🌿 Pinaatti"]}},
     {type:"subgroup", id:'k', position:{x:480,y:-420}, data:{name:'K-vitamiini', group:"Rasvaliukoinen", icon:"🥬", color:"#1111ff"}},
 
 
-    {type:"subgroup", id:'vesiliukoiset', position:{x:560,y:-300}, data:{name:'Vesiliukoiset', icon:"💧"}},
-    {type:"subgroup", id:'b', position:{x:700,y:-420}, data:{name:'B-vitamiini', group:"Vesiliukoinen", icon:"🥚", color:"#11aa11"}},
+    {type:"subgroup", id:'vesiliukoiset', position:{x:560,y:-300}, data:{name:'Vesiliukoiset', icon:"💧", description:<>
+        Vesiliukoiset vitamiinit liukenevat veteen, joten ne eivät varastoidu elimistöön ja suurin osa poistuu virtsan mukana.
+    </>}},
+    {type:"subgroup", id:'b', position:{x:700,y:-420}, data:{name:'B-vitamiini', group:"Vesiliukoinen", icon:"🥚", color:"#11aa11", description:<>
+        <div style={{display:"flex", flexDirection:"row", flexWrap:"wrap", gap:16}}>
+            <SubVitamin name={<>B<sub>1</sub>-vitamiini</>} alt="tiamiini" content="Energiantuotanto ja hermoston toiminta."
+                sources={["🥜Pähkinät", "🌻Siemenet", "🌾Viljat", "🐷Liha"]}/>
+            <SubVitamin name={<>B<sub>2</sub>-vitamiini</>} alt="riboflaviini" content="Energiantuotanto ja solujen kasvu."
+                sources={[ "🥛Maitotuotteet", "🍄Sienet", "🥗Vihannekset" ]}/>
+            <SubVitamin name={<>B<sub>3</sub>-vitamiini</>} alt="niasiini" content="Energiantuotanto ja DNA:n korjaus."
+                sources={[ "🐔Kana", "🐟Kala", "🥜Pähkinät", "🌾Vilja" ]}/>
+            <SubVitamin name={<>B<sub>5</sub>-vitamiini</>} alt="pantoteenihappo" content="Rasvahappojen ja hormonien tuotanto."
+                sources={[ "🥚Kananmuna", "🥦Parsakaali", "🌾Vilja" ]}/>
+            <SubVitamin name={<>B<sub>6</sub>-vitamiini</>} alt="pyridoksiini" content="Aminohappojen aineenvaihdunta ja hermoston toiminta."
+                sources={[ "🍌Hedelmät", "🐔Kana", "🥔Perunat" ]}/>
+            <SubVitamin name={<>B<sub>7</sub>-vitamiini</>} alt="biotiini" content="Rasvojen, hiilihydraattien ja aminohappojen aineenvaihdunta."
+                sources={[ "🥚Kananmuna", "🐟Kala", "🥜Pähkinät", "🥬Kukkakaali" ]}/>
+            <SubVitamin name={<>B<sub>9</sub>-vitamiini</>} alt="foolihappo" content="DNA:n synteesi ja solujen jakautuminen."
+                sources={[ "🌱Pavut", "🍊Hedelmät", "🌾Viljat" ]}/>
+            <SubVitamin name={<>B<sub>12</sub>-vitamiini</>} alt="foolihappo" content="Punasolujen muodostuminen ja hermojen toiminta."
+                sources={[ "🥩Liha", "🐟Kala", "🥛Maitotuotteet", "🥚Kananmuna" ]}/>
+        </div>
+    </>}},
     {type:"subgroup", id:'c', position:{x:800,y:-320}, data:{name:'C-vitamiini', group:"Vesiliukoinen", icon:"🍊", color:"#aa11ff",
         formula:<>C<sub>6</sub>H<sub>8</sub>O</>}},
 
@@ -122,11 +222,14 @@ export const nodes = [
 
     {type:"subgroup", id:'kalsium', position:{x:165,y:140}, data:{
         name:'Kalsium', icon:"Ca", group:"Makrokivennäisaine",
-        description:"Kalsium on yleisin kivennäisaine elimistössä. Ihminen tarvitsee kalsiumia luuston ja hampaiden hyvinvointiin sekä aineenvaihduntaan",
+        description:<>
+            Kalsium on yleisin kivennäisaine elimistössä. Ihminen tarvitsee kalsiumia luuston ja hampaiden hyvinvointiin sekä aineenvaihduntaan.
+            <p/>D-vitamini auttaa kalsiumin imeytymistä suolistoon.
+        </>,
         sources:[
             <><img src={tofu} style={{height:44, position:"absolute", transform:"translate(-6px, -10px)"}}></img>
                 <span style={{whiteSpace:"pre"}}>       Tofu</span>
-            </>, "🥛 Maitotuotteet", "Soijapavut", "🌿 Pinaatti"
+            </>, "🥛 Maitotuotteet", "🌱 Soijapavut", "🌿 Pinaatti"
         ]}},
     {type:"subgroup", id:'magnesium', position:{x:65,y:260}, data:{
         name:'Magnesium', icon:"Mg", group:"Makrokivennäisaine"}},
