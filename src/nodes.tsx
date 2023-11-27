@@ -173,8 +173,11 @@ export const nodes = [
         <br/>Liiallinen saanti voi olla terveyshaitta.
     </>}},
     {type:"subgroup", id:'a', position:{x:-120,y:-420}, data:{name:'A-vitamiini', group:"Rasvaliukoinen", icon:"🥕", color:"#ff1111", formula:<>C<sub>20</sub>H<sub>30</sub>O</>, description:<>
-        A-vitamiini eli retinoli
-    </>}},
+        A-vitamiini eli eläinperäinen retinoli tai kasviperäinen karotenoidi on rasvaliukoinen vitamiini, jolla on monia vaikutuksia kuten
+        <li>Parantaa hämäränäköä.</li>
+        <li>Tärkeä ihon ja limakalvojen terveydelle sekä solujen kasvulle.</li>
+        <li>Auttaa immuunijärjestelmän toimintaa ja torjuu infektioita.</li>
+    </>, sources:["🐟 Kala", "🍅 Tomaatti", "🥛 Maitotuotteet", "🥚 Kananmuna"]}},
     {type:"subgroup", id:'d', position:{x:80,y:-420}, data:{name:'D-vitamiini', group:"Rasvaliukoinen", icon:"🐟", color:"#ff1188", description:<>
         D-vitamiini eli kalsiferoli on rasvaliukoinen vitamiiniryhmä, johon kuuluu luonnollisesti D<sub>1</sub>, D<sub>2</sub>, D<sub>3</sub>, D<sub>4</sub> ja D<sub>5</sub>
 
@@ -189,7 +192,12 @@ export const nodes = [
         E-vitamiinilla on kaksi pääryhmää tokoferoli ja tokotrienoli, jonka sisällä on eri isomeerejä. Ihmiskeho käyttää pelkästään α-tokoferolia.
         <p/>E-vitamiini vaikuttaa elimistön rasvahapposynteesiin, verihiutaleiden toimintaan, säätelee veren kolesterolitasoa, edistää verenkiertoa ja parantaa soluvälitteistä immuunivastetta.
     </>, sources:["🌻 Voikukkaöljy ja -siemenet", "🥜 Manteli", "🥚 Kananmuna", "🥑 Avokado", "🌿 Pinaatti"]}},
-    {type:"subgroup", id:'k', position:{x:480,y:-420}, data:{name:'K-vitamiini', group:"Rasvaliukoinen", icon:"🥬", color:"#1111ff"}},
+    {type:"subgroup", id:'k', position:{x:480,y:-420}, data:{name:'K-vitamiini', group:"Rasvaliukoinen", icon:"🥬", color:"#1111ff", description:<>
+        K-vitamiini eli kasviperäinen fyllokinooni (K<sub>1</sub>) tai pääosin eläinperäinen menakinoni (K<sub>2</sub>) on rasvaliukoinen vitamiini, joilla on monta vaikutusta kuten
+        <li>Välttämätön veren hyytymisessä. Se auttaa tuottamaan protrombiinia ja muita hyytymistekijöitä.</li>
+        <li>Parantaa luuston terveyttä, osallistuen luun aineenvaihduntaan.</li>
+        <p/><small>Elimistömme suolistobakteerit voivat tuottaa K-vitamiinia</small> 
+    </>, sources:["🌿 Pinaatti", "🥦 Parsakaali", "🥬 Lehtikaali"]}},
 
 
     {type:"subgroup", id:'vesiliukoiset', position:{x:560,y:-300}, data:{name:'Vesiliukoiset', icon:"💧", description:<>
@@ -215,8 +223,14 @@ export const nodes = [
                 sources={[ "🥩Liha", "🐟Kala", "🥛Maitotuotteet", "🥚Kananmuna" ]}/>
         </div>
     </>}},
-    {type:"subgroup", id:'c', position:{x:800,y:-320}, data:{name:'C-vitamiini', group:"Vesiliukoinen", icon:"🍊", color:"#aa11ff",
-        formula:<>C<sub>6</sub>H<sub>8</sub>O</>}},
+    {type:"subgroup", id:'c', position:{x:800,y:-320}, data:{name:'C-vitamiini', group:"Vesiliukoinen", icon:"🍊", color:"#aa11ff", formula:<>C<sub>6</sub>H<sub>8</sub>O</>, description:<>
+        C-vitamiini eli askorbiinihappo on vesiliukoinen vitamiini.
+        <li>Toimii antioksidanttina, auttaen vähentämään vapaita radikaaleja. Suojaa soluja oksidatiiviselta stressiltä.</li>
+        <li>Välttämätön kollageenin muodostumisessa, joka on tärkeä proteiini ihon, luiden, hampaiden ja rustojen terveydelle.</li>
+        <li>Edistää mmuunijärjestelmän tavallista toimintaa ja auttaa kehoa torjumaan infektioita.</li>
+        <li>Parantaa raudan imeytymistä ruoasta.</li>
+        <li>Auttaa tietyissä aineenvaihduntaprosessien säätelyssä kuten karnitiinin.</li>
+    </>, sources:["🍅 Hedelmät", "🌶 Paprika", "🍓 Marjat"]}},
 
     {type:"subgroup", id:'hivenaineet', position:{x:450,y:275}, data:{name:'Hiven- ja kivennäisaineet', icon:'🧪'}},
 
