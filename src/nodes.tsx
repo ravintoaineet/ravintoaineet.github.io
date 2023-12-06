@@ -3,8 +3,20 @@ import MessageNode from "./nodes/MessageNode";
 import RootNode from "./nodes/RootNode";
 
 import tofu from "/tofu.png";
+import aminohapot from "/aminohapot.png";
+import rasvat from "/rasva.png";
+import styled from "styled-components";
 
 export const nodeTypes = {root:RootNode, message:MessageNode, subgroup:GroupNode};
+
+const Wrappable = styled.p`
+    display:flex;
+    flex-direction:row;
+
+    @media only screen and (max-width: 900px) {
+        flex-direction: column;
+    }
+`;
 
 function SubVitamin(data: {name: React.ReactNode, alt: string, content: any, width?: any, sources: string[]}) {
     return <div style={{display:"flex", flexDirection:"column", gap:8, width:data.width != undefined ? data.width : "max(290px, 30%)"}}>
@@ -58,19 +70,43 @@ export const nodes = [
         Proteiineilla eli valkuaisaineilla on iso rooli elimistön rakenteessa ja toiminnassa. Proteiinin tehtäviin kuuluu myös energian tuottaminen.
         Jokaisesta solustasi löytyy erilaisia proteiineja, ja jokaisella on oma tehtävänsä. Eniten proteiinia löytyy lihaksista.
         Valkuaisainepitoisen ruoan syöminen ja liikunta lisäävät lihasmassaa.
+        <Wrappable>
+            <div>
+                Proteiinit ovat makromolekyylejä, jotka muodostuvat aminohapoista. Yksi proteiinimolekyyli voi sisältää tuhansia aminohappoja.
+                Aminohapot muodostuvat hiilestä, vedystä, hapesta ja typestä. Usein niissä esiintyy myös rikkiä ja fosforia.
+                Aminiohapot ovat kiinnittyneet toisiinsa peptidisidoksilla. Aminohappomolekyyliin kuulluu karboksyyliryhmä (-COOH) ja aminoryhmä (-NH<sub>2</sub>).
+                <br/>Ruuan mukana tuleva proteiini hajoaa suolistossa aminohapoiksi ja elimistö muunta ne tarvittaviksi valkuaisaineiksi.
+            </div>
+            <img src={aminohapot} alt="Aminohappojen rakennekaava" style={{width:"200px", height:"100px"}}/>
+        </Wrappable>
+        Proteiini denaturoituu paistamalla tai keittämällä. Tämä muuttaa proteiinin rakennetta pysyvästi, jolloin se kadottaa toimintakykynsä.
+        Denaturoituminen on tärkeä ruoanvalmistukelle. Proteiinin rakenne ja maku tulevat paremmin esille denaturoituneena.
     </>, sources: [
-        "🥩 Liha", "🐔 Broileri", "🐟 Kala", "🥚 Kananmunat", "🥛 Maitotuotteet", "🌱 Palkokasvit (Pavut & Linssit)", "🥜 Pähkinät", "🌽 Siemenet"
+        "🥩 Liha", "🐔 Broileri", "🐟 Kala", "🥚 Kananmunat", "🥛 Maitotuotteet", <span title="Pavut & Linssit">🌱 Palkokasvit</span>, "🥜 Pähkinät", "🌽 Siemenet"
     ]}},
-    {type:"subgroup", id:'rasvat', position:{x:-750,y:-100}, data:{name:'Rasvat', icon:'🍔'}},
-    {type:"subgroup", id:'tyydyttymättömät', position:{x:-1000,y:-150}, data:{name:'Tyydyttymättömät', icon:'🥑', description:<>
+    {type:"subgroup", id:'rasvat', position:{x:-750,y:-100}, data:{name:'Rasvat', icon:'🍔', description:<>
+        <Wrappable>
+            <div>
+                Rasvat ovat elimistölle elintärkeitä energian tuottajia. Rasvat myös suojaavat ja toimivat lämmöneristeenä.
+                Rasvat kuljettavat rasvaliukoisia vitamiineja (A, D, E ja K) eri puolille elimistöä.
+                <p>Rakenteeltaan rasvat ovat estereitä ja muodostuvat glyserolista ja rasvahapoista eli pitkäketjuisista karboksyylihapoista.
+                Glyserolin kustakin hydroksyyliryhmästä lähtee rasvahappo. Yleensä rasvahapoissa on 12-18 hiiltä ja hiilimäärä on useimmiten parillinen.
+                </p>
+            </div> 
+            <img src={rasvat} alt="Aminohappojen rakennekaava" width="355px" height="260px"/>
+        </Wrappable>
+    </>}},
+    {type:"subgroup", id:'tyydyttymättömät', position:{x:-1000,y:-150}, data:{name:'Tyydyttymättömät', group:"Unsaturated", icon:'🥑', description:<>
         Tyydyttymättömät rasvat eli pehmeät rasvat sisältävät hiiliketjuilla kaksoissidoksia.
-        <p/>Pehmeät rasvat ovat jaettu kahteen pääryhmään: Yksityydyttymättömät ja monityydyttymättömät.
-        Monityydyttymättömissä rasvoissa on monta kaksoissidosta
-    </>}},
-    {type:"subgroup", id:'tyydyttyneet', position:{x:-975,y:-50}, data:{name:'Tyydyttyneet', icon:'🍟', description:<>
+        Pehmeät rasvat ovat jaettu kerta- ja monityydyttymättömiin rasvoihin.
+        Monityydyttymättömissä rasvoissa on monta kaksoissidosta.
+        <p/>Kasvirasvat yleensä ovat nestemäisiä huoneenlämmössä.
+    </>, sources:["🌾 Kasviöljy", "🐟 Kala", "🥜 Pähkinät"]}},
+    {type:"subgroup", id:'tyydyttyneet', position:{x:-975,y:-50}, data:{name:'Tyydyttyneet', group:"Saturated", icon:'🍟', description:<>
         Tyydyttyneet rasvat eli kovat rasvat eivät sisällä kaksoissidoksia hiilivetyketjuissaan.
-        <p/>Kovat rasvat ovat vähemmän suositeltuja, koska ne voivat lisätä LDL-kolesterolia, mikä mahdollisesti aiheuttaa sydänsairauksia, koska verisuonet tukkiutuvat siitä.
-    </>}},
+        Kovat rasvat ovat enemmikseen eläinrasvoja ja ovat huoneenlämmössä kiinteitä.
+        <p/>Kovat rasvat ovat vähemmän suositeltuja, koska ne voivat lisätä LDL-kolesterolia, mikä mahdollisesti aiheuttaa sydänsairauksia, kun verisuonet tukkiutuvat siitä.
+    </>, sources:["🥩 Liha", "🧈 Voi", "🎂 Leivonnaiset"]}},
 
     {type:"subgroup", id:'hiilihydraatit', position:{x:-450,y:125}, data:{name:'Hiilihydraatit', icon:'🌾', description:<>
         Hiilihydraatit ovat yhdisteitä, jotka koostuvat hiilestä, vedystä ja hapesta. Ne ovat kehon pääenergianlähde.
@@ -89,7 +125,11 @@ export const nodes = [
         <br/><strong>Liukenevat kuidut</strong> muodostavat geelimäisiä rakenteita koskettaessaan veteen. Ne liukenevat veteen ja voivat auttaa säätelemään verensokeritasoja ja kolesterolitasoja.
         <br/><strong>Liukenemattomat kuidut</strong> taas eivät liukene veteen ja edistävät suoliston terveyttä. Esim. selluloosa
     </>, sources:["🍐 Hedelmät", "🥑 Vihannekset", "🍞 Täysjyvävilja", "🥜 Pähkinät", "🌻 Siemenet"]}},
-    {type:"subgroup", id:'tärkkelys', position:{x:-500,y:400}, data:{name:'Tärkkelys', group:<>Polysakkaridi</>, icon:'🌽', formula:<>(C<sub>6</sub>H<sub>10</sub>O<sub>5</sub>)n</>}},
+    {type:"subgroup", id:'tärkkelys', position:{x:-500,y:400}, data:{name:'Tärkkelys', group:<>Polysakkaridi</>, icon:'🌽', formula:<>(C<sub>6</sub>H<sub>10</sub>O<sub>5</sub>)n</>, description:<>
+        Tärkkelys on glukoosiyksiköistä muodostuva ketju. Se on valkoinen ja rakeinen molekyyli, joka ei liukene kylmään veteen eikä alkoholiin.
+        Tärkkelykset jaetaan suoraketjuisiin amylooseihin ja haarautuneisiin amylopektiineihin.
+        <p/>Kaikki vihreät kasvit tuottavat tärkkelystä säilöäkseen ylimääräistä glukoosia. Tärkkelys varastoituu viherhiukkasiin tai muihin varastoihin, kuten juuriin, mukuloihin tai siemeniin.
+    </>, sources:["🍚 Riisi", "🌽 Maissi", "🥔 Peruna"]}},
     
     // Glykogeeni?
 
@@ -137,9 +177,12 @@ export const nodes = [
     </>}},
     {type:"subgroup", id:'glukoosi', position:{x:-1025,y:200}, data:{
         name:'Glukoosi', icon:'🌞', group:<>Monosakkaridi</>, formula:<>C<sub>6</sub>H<sub>12</sub>O<sub>6</sub></>, description:<>
-            Glukoosi eli rypäle- tai panimosokeri, on yksi yleisin sokeri. Glukoosia muodostuu fotosynteesissä!
+            Glukoosi eli rypäle- tai panimosokeri, on yksi yleisimmistä sokereista.
+            <br/>Glukoosi on monosakkaridi ja sitä esiintyy laktoosissa, maltoosissa ja sakkaroosissa.
+            Sitä myös esiintyy useissa polysakkarideissa, kuten glykogeenissa, tärkkelyksessä, selluloosassa ja kalloosissa.
             <p/>
-            <div style={{whiteSpace:"pre", display:"flex", flexDirection:"row", gap:20}}>
+            <b>Glukoosia muodostuu fotosynteesissä!</b>
+            <div style={{whiteSpace:"pre", display:"flex", flexDirection:"row", gap:20, lineHeight:"20px", marginTop:8}}>
                 <div style={{display:"flex", flexDirection:"column"}}>
                     <span>6 CO<sub>2</sub> + 6 H<sub>2</sub>O</span>
                     <span>hiilidioksidi + vesi</span>
@@ -149,6 +192,11 @@ export const nodes = [
                     <span>➡      glukoosi + happi</span>
                 </div>
             </div>
+    </>}},
+    {type:"subgroup", id:'sakkaroosi', position:{x:-1075,y:80}, data:{name:'Sakkaroosi', icon:'🥧', group:<>Disakkaridi</>, formula:<>C<sub>12</sub>H<sub>22</sub>O<sub>11</sub></>, description:<>
+        Sakkaroosi eli ruokosokeri tai tavallinen sokeri on disakkaridi, joka muodostuu glukoosista ja fruktoosista.
+        Sukkaroosilla ei ole sulamispistettä, vaan se hajoaa lämmitysnopeuden mukaan.
+        <p/>Sakkaroosia löytyy sokerijuurikkaasta (16-20%), sokeriruo'osta (13-20%), ananaksesta ja maissista.
     </>}},
     {type:"subgroup", id:'laktoosi', position:{x:-1100,y:350}, data:{
         name:'Laktoosi', icon:'🥛', group:<>Disakkaridi</>, formula:<>C<sub>12</sub>H<sub>22</sub>O<sub>11</sub></>, description:<>
@@ -232,27 +280,78 @@ export const nodes = [
         <li>Auttaa tietyissä aineenvaihduntaprosessien säätelyssä kuten karnitiinin.</li>
     </>, sources:["🍅 Hedelmät", "🌶 Paprika", "🍓 Marjat"]}},
 
-    {type:"subgroup", id:'hivenaineet', position:{x:450,y:275}, data:{name:'Hiven- ja kivennäisaineet', icon:'🧪'}},
+    {type:"subgroup", id:'kivennaisaineet', position:{x:450,y:275}, data:{name:'Hiven- ja kivennäisaineet', icon:'🧪', description:<>
+        Kivennäisaineet ovat tärkeitä ravintoaineita, joita elimistö tarvitsee tietyissä määrissä toimiakseen, jotka jaetaan makro- ja mikrokivennäisaineisiin.
+        <p>
+            <ul><b>Kivennäisaineet (Makro)</b>
+                <li>Makrokivennäisaineita elimistö tarvitsee suurempia määriä kuin hivenaineita.</li>
+                <li>Esimerkkejä ovat kalsium, magnesium, natrium, kalium ja fosfori.</li>
+            </ul>
+            <ul><b>Hivenaineet (Mikro)</b>
+                <li>Mikrokivennäisaineita elimistö tarvitsee hiukemman verrattuna makrokivennäisaineisiin.</li>
+                <li>Esimerkkejä ovat rauta, kupari, sinkki, seleeni, jodi ja mangaani.</li>
+            </ul>
+        </p>
+    </>}},
 
-    {type:"subgroup", id:'kalsium', position:{x:165,y:140}, data:{
+    {type:"subgroup", id:'kalsium', position:{x:300,y:450}, data:{
         name:'Kalsium', icon:"Ca", group:"Makrokivennäisaine",
         description:<>
-            Kalsium on yleisin kivennäisaine elimistössä. Ihminen tarvitsee kalsiumia luuston ja hampaiden hyvinvointiin sekä aineenvaihduntaan.
+            Kalsium on yleisin kivennäisaine elimistössä.
+            <li>Kriittinen luuston ja hampaiden hyvinvoinnille.</li>
+            <li>Välttämätön lihasten supistumiselle ja rentoutumiselle.</li>
+            <li>Osallistuu veren hyytymisprosessiin.</li>
+            <li>Säätelee solujen välistä viestintää ja signalointia.</li>
             <p/>D-vitamini auttaa kalsiumin imeytymistä suolistoon.
-        </>,
-        sources:[
-            <><img src={tofu} style={{height:44, position:"absolute", transform:"translate(-6px, -10px)"}}></img>
+        </>, sources:[
+            <><img src={tofu} style={{height:40, position:"absolute", transform:"translate(-6px, -10px)"}}></img>
                 <span style={{whiteSpace:"pre"}}>       Tofu</span>
-            </>, "🥛 Maitotuotteet", "🌱 Soijapavut", "🌿 Pinaatti"
+            </>, "🐟 Lohi", "🥛 Maitotuotteet", "🌱 Soijapavut", "🌿 Pinaatti"
         ]}},
-    {type:"subgroup", id:'magnesium', position:{x:65,y:260}, data:{
-        name:'Magnesium', icon:"Mg", group:"Makrokivennäisaine"}},
-    {type:"subgroup", id:'natriumkalium', position:{x:120,y:370}, data:{name:'Natrium & Kalium', icon:"NaK", group:"Makrokivennäisaine"}},
+    {type:"subgroup", id:'magnesium', position:{x:125,y:200}, data:{name:'Magnesium', icon:"Mg", group:"Makrokivennäisaine", description:<>
+        Magnesium on tärkeä makrokivennäisaine monesta syystä.
+        <li>Osana energiantuotantoa, erityisesti <span title="ATP">adenosiinitrifosfaatin</span> muodostamisessa.</li>
+        <li>Välttämätön lihasten supistumiselle ja rentoutumiselle.</li>
+        <li>Auttaa kalsiumia imeytymään, joka auttaa D-vitamiinia imeytymään.</li>
+        <li>Vaadittu proteiinin synteesissä, mikä vaikuttaa solujen kasvuun ja korjaukseen.</li>
+        <li>Parantaa stressinsietokykyä ja rentouttaa hermostoa.</li>
+    </>}},
+    {type:"subgroup", id:'natriumkalium', position:{x:120,y:350}, data:{name:'Natrium & Kalium', icon:"NaK", group:"Makrokivennäisaine", description:<>
+        Natrium ja kalium ovat makrokivennäisaineita.
+        Molemmat ovat elektrolyyttejä, jotka toimivat yhdessä ylläpitäen elektrolyyttitasapainoa elimistössä. Kummatkin osallistuvat hermoimpulssien siirtoon ja lihasten supistumiseen.
+        
+        <p>
+            <ul><b>Natrium</b>
+            <li>Säätelee kehon nestetasapainoa.</li>
+            <li>Liika saanti voi kuitenkin nostaa verenpainetta ja aiheuttaa muita terveysongelmia.</li></ul>
+            <ul><b>Kalium</b>
+            <li>Vastaa solujen elektrolyyttitasapainosta pääosin solun sisällä.</li>
+            <li>Osallistuu hermoimpulssien siirtoon ja lihasten supistumiseen.</li>
+            <li>Kompensoi natriumin vaikutuksia verenpaineeseen ja ylläpitää sydämen terveyttä.</li></ul>
+        </p>
+    </>}},
 
-    {type:"subgroup", id:'rauta', position:{x:420,y:460}, data:{name:'Rauta', icon:"Fe", group:"Mikrokivennäisaine"}},
-    {type:"subgroup", id:'sinkki', position:{x:720,y:360}, data:{name:'Sinkki', icon:"Zn", group:"Mikrokivennäisaine"}},
-    {type:"subgroup", id:'jodi', position:{x:740,y:240}, data:{name:'Jodi', icon:"I", group:"Mikrokivennäisaine"}},
-    {type:"subgroup", id:'seleeni', position:{x:640,y:120}, data:{name:'Seleeni', icon:"Se", group:"Mikrokivennäisaine"}},
+    {type:"subgroup", id:'rauta', position:{x:650,y:420}, data:{name:'Rauta', icon:"Fe", group:"Mikrokivennäisaine", description:<>
+        Rauta on tärkeä hivenaine, joka on välttämätön elimistölle.
+        <li>Hemoglobiinissa on rautaa, joka kuljettaa happea keuhkoista kehon eri osiin.</li>
+        <li>Rautaa on entysyymeissä, jotka osallistuvat energiantuotantoon ja aineenvaihduntaan.</li>
+        <li>Rauta on immuunijärjestelmän normitoimintojen kannalta elintärkeä.</li>
+        <li>Keho tarvitsee rautaa kasvuun ja kehittymiseen.</li>
+        <p/>Rauta voidaan jakaa eläinkunnan tuotteista saatavaan hemirautaan ja kasvikunnan epirautaan.
+    </>}},
+    {type:"subgroup", id:'sinkki', position:{x:760,y:260}, data:{name:'Sinkki', icon:"Zn", group:"Mikrokivennäisaine", description:<>
+        Sinkki on olennainen hivenaine, joka pitää elimistön kunnossa monella tavalla.
+        <li>Välttämätön immuunijärjestelmän toiminnalle.</li>
+        <li>Edistää haavojen ja vammojen paranemista.</li>
+        <li>Ylläpitää makuaistia.</li>
+        <li>Tarpeen näkökyvylle ja silmien terveydelle.</li>
+    </>}},
+    {type:"subgroup", id:'jodi', position:{x:640,y:120}, data:{name:'Jodi', icon:"I", group:"Mikrokivennäisaine", description:<>
+        Jodi on tärkeä hivenaine kilpirauhaselle ja koko keholle.
+        <li>Keskeinen osa kilpirauhashormoneja, jotka säätelevät aineenvaihduntaa ja vaikuttaa laajasti kehon soluihin.</li>
+        <li>Riittävä jodin saanti on tärkeää raskaana oleville. Edistää sikiön aivojen ja hermoston kehitystä.</li>
+        <li>Ehkäisee kilpirauhasen sairauksia, kuten <span title="kilpirauhasen liikakasvu">struuman.</span></li>
+    </>}},
 ].filter(a => a.id != "message" || localStorage.getItem("message") != "false");
 
 export const connections = [
@@ -274,19 +373,19 @@ export const connections = [
     {id:'sokerit-fruktoosi', type:"straight", source:'monodisakkaridit', target:'fruktoosi'},
     {id:'glukoosi-laktoosi', type:"straight", source:'glukoosi', target:'laktoosi'},
 
-    
+    {id:'glukoosi-sakkaroosi', type:"straight", source:'glukoosi', target:'sakkaroosi'},
+    {id:'glukoosi-sakkaroosi', type:"straight", source:'fruktoosi', target:'sakkaroosi'},    
 
 
     {id:'root-suoja', type:"straight", source:'ravintoaineet', target:'suojaravintoaineet'},
-    {id:'suoja-hiven', type:"straight", source:'suojaravintoaineet', target:'hivenaineet'},
+    {id:'suoja-hiven', type:"straight", source:'suojaravintoaineet', target:'kivennaisaineet'},
 
-    {id:"a", source:'hivenaineet', target:'kalsium'},
-    {id:"b", source:'hivenaineet', target:'magnesium'},
-    {id:"c", source:'hivenaineet', target:'natriumkalium'},
-    {id:"d", source:'hivenaineet', target:'rauta'},
-    {id:"e", source:'hivenaineet', target:'sinkki'},
-    {id:"f", source:'hivenaineet', target:'jodi'},
-    {id:"g", source:'hivenaineet', target:'seleeni'},
+    {id:"a", source:'kivennaisaineet', target:'kalsium'},
+    {id:"b", source:'kivennaisaineet', target:'magnesium'},
+    {id:"c", source:'kivennaisaineet', target:'natriumkalium'},
+    {id:"d", source:'kivennaisaineet', target:'rauta'},
+    {id:"e", source:'kivennaisaineet', target:'sinkki'},
+    {id:"f", source:'kivennaisaineet', target:'jodi'},
 
     {id:"h", type:"straight", source:'suojaravintoaineet', target:'vitamiinit'},
     {id:"i", type:"straight", source:'vitamiinit', target:'vesiliukoiset'},

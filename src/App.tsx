@@ -55,7 +55,7 @@ function App() {
           edgesFocusable={false}
           elementsSelectable={false}
           nodesDraggable={false}
-          translateExtent={[[-2000, -1000], [2000, 1000]]}
+          translateExtent={[[-2000, -1000], [1800, 1000]]}
           onNodeClick={(_, node) => openModal(node)}
           onNodeContextMenu={(e, node) => {
             e.preventDefault();
@@ -83,8 +83,8 @@ function App() {
         <Background color="#aaa" gap={16} />
         <Controls showInteractive={false}/>
       </ReactFlow>
-      <NodeModal modalData={modal} close={closeModal}/>
     </div>
+    <NodeModal modalData={modal} close={closeModal}/>
   </>)
 }
 

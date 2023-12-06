@@ -1,3 +1,4 @@
+import { useLayoutEffect, useState } from "react";
 import styled from "styled-components";
 
 
@@ -55,6 +56,7 @@ const Box = styled.div`
     border-width: 2px;
     background: #ffffffcc;
     box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
 }
 
 td, th {
@@ -80,8 +82,10 @@ caption {
 
 const CloseButton = styled.button`
 & {
-    width: 40px; 
-    height: 40px;
+    position: absolute;
+    transform: translate(-52px, -18px);
+    width: 38px; 
+    height: 38px;
 
     user-select: none;
     cursor: pointer;
@@ -89,7 +93,7 @@ const CloseButton = styled.button`
     font-weight: 900;
     text-align: center;
     
-    border-radius: 0.375rem; 
+    border-radius: 8px; 
     border-width: 2px;
     background: #ffffff;
     box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.4);
@@ -100,82 +104,103 @@ const CloseButton = styled.button`
 
 &:hover {
     color: #ee0000;
+    transform: translate(-52px, -18px) scale(1.1);
 }
 
 &:active {
-    transform: scale(0.9);
+    transform: translate(-52px, -18px) scale(0.8);
     color: #ee5555;
-    font-size: 24px;
 }
 `;
+
+function useMobile() {
+    const [mobile, setMobile] = useState(window.innerWidth <= 800);
+    useLayoutEffect(() => {
+      const updateSize = () => {
+        setMobile(window.innerWidth <= 800)
+      }
+      window.addEventListener('resize', updateSize);
+      updateSize();
+      return () => window.removeEventListener('resize', updateSize);
+    }, []);
+    return mobile;
+  }
 
 function NodeModal({modalData, close}: Props) {
     if (!modalData.shown)
         return;
+    const mobile = useMobile();
+
+
     const data = modalData.data;
     const content = data.description != null ?
         data.description : "Ei lisättyä tietoa . . . . ";
-    const mobile = window.innerWidth <= 800;
-    const titleSize = mobile && (data.name.length > 14 || (data.group != null && data.group.length > 14)) ?
-        26 : 32;
+    const titleSize = mobile && (data.name.length > 16 || (data.group != null && data.group.length > 16)) ? 22
+        : mobile && (data.name.length > 14 || (data.group != null && data.group.length > 14)) ? 26 : mobile ? 28 : 32;
     const adjustForTable = !mobile && data.table != undefined;
     return <>
         <BackgroundBlur onMouseDown={close}/>
         <Container style={{
-            position:"absolute", display:"flex", flexDirection:"column", gap:24,
-            top:0, paddingTop:mobile ? "48px" : "5%", paddingBottom:32, left:mobile ? "5vw" : "10vw", width:mobile ? "90vw" : "80vw"
+            position:"absolute", display:"flex", flexDirection:"column", gap:24, width:"100%", boxSizing: "border-box",
+            top:0, paddingTop:mobile ? "48px" : "4%", paddingLeft:mobile ? "5vw" : "10vw", paddingRight:mobile ? "5vw" : "10vw", paddingBottom:mobile ? "24px" : undefined
         }} onMouseDown={e => {
             if (e.currentTarget == e.target) close();
         }} >
-            <div style={{display:"flex", gap:32}} onMouseDown={e => {
+            <div style={{width:"inherit", display:mobile ? undefined : "flex", gap:32}} onMouseDown={e => {
                 if (e.currentTarget == e.target) close();
             }}>
                 <Box style={{
-                    width: mobile ? "100%" : "max-content",
-                    maxWidth:mobile ? "85%" : "70%",
+                    width: mobile ? "inherit" : "max-content",
+                    maxWidth:mobile ? undefined : "70%",
+                    paddingRight:mobile ? 0 : undefined
                 }}>
                     <div style={{display:"flex"}}>
                         {data.icon == null ||
-                            <div style={{userSelect:"none", display:"flex",fontSize:"2.5rem", justifyContent:"center", alignItems:"center",borderRadius:"9999px",width:"6rem",height:"6rem",backgroundColor:"#F3F4F6"}}>
-                                {data.icon}
-                            </div>
+                            <div style={{
+                                userSelect:"none", width:mobile ? titleSize * 3 : "90px", height:mobile ? titleSize * 3 : "90px", fontSize:titleSize * 1.3,
+                                display:"flex", justifyContent:"center", alignItems:"center", borderRadius:"100%", backgroundColor:"#F3F4F6"
+                            }}> {data.icon} </div>
                         }
                         { data.group != null ?
-                            <div style={{display:"flex", flexDirection:"column", marginLeft:"1.5rem"}}>
-                                <span style={{fontSize:titleSize, marginTop:15, letterSpacing:1, fontWeight:700, color:data.color}}>{data.name}</span>
-                                <span style={{fontSize:titleSize - 2, letterSpacing:1, color:"#6B7280"}}>{data.group}</span>
+                            <div style={{display:"flex", flexDirection:"column", marginLeft: "22px", marginTop:"auto", marginBottom:"auto"}}>
+                                <span style={{fontSize:titleSize, letterSpacing:1, fontWeight:700, color:data.color}}>{data.name}</span>
+                                <span style={{fontSize:titleSize - 2, color:"#6B7280"}}>{data.group}</span>
                             </div>
-                        : <h1 style={{fontSize:titleSize, letterSpacing:1, color:data.color, marginLeft:"1.5rem", marginTop:"32px"}}>{data.name}</h1>}
+                        : <h1 style={{fontSize:titleSize, letterSpacing:1, color:data.color, marginLeft:mobile ? "16px" : "22px", marginTop: "auto", marginBottom:"auto"}}>{data.name}</h1>}
                     </div>
                 </Box>
+                { mobile || <div style={{position:"relative"}}>
+                    <CloseButton onClick={close}>X</CloseButton>
+                </div> }
                 {(data.formula == null || mobile) ||
-                    <Box><h1 style={{color:data.color, marginLeft:"1.5rem", lineHeight:"3.5rem"}}>{data.formula}</h1></Box>
+                    <Box><h1 style={{color:data.color, marginLeft:"16px"}}>{data.formula}</h1></Box>
                 }
-                { mobile || <CloseButton onClick={close}>X</CloseButton> }
             </div>
             <Box style={{
+                width: "inherit",
                 padding: mobile ? "8px" : "24px",
                 fontSize: "20px"
             }}>
                 <div style={{display:"flex", flexDirection:adjustForTable ? "row" : "column", gap: 32}}>
                     <div style={{padding:16, width:adjustForTable ? "70%" : undefined}}>
-                        <span style={{lineHeight:"28px"}}>
+                        <span style={{lineHeight: "28px"}}>
                             {content}
                         </span>
                     </div>
                     {data.table}
                 </div>
-                {data.sources == null || <div style={{
-                    display:"flex", flexWrap: "wrap", gap: mobile ? 8 : 24, marginTop:"8px", padding:8, paddingTop:16, paddingBottom:16,
-                    boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px", borderRadius:16, justifyContent:"center"
-                }}>
-                    {data.sources.map((source: string) => (
-                        <div key={source} style={{background:"#fff", boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px", borderRadius:10, padding:8}}>
-                            <span style={{letterSpacing:mobile ? 0 : 1}}>{source}</span>
-                        </div>
-                    ))}
-                </div> }
             </Box>
+            {data.sources == null || <div style={{  display: "flex", justifyContent: "center"}}><div style={{
+                width: mobile ? "100%" : "max-content", boxSizing: "border-box", padding: mobile ? 8 : 16, paddingTop: 16, paddingBottom: 16,
+                display: "flex", flexWrap: "wrap", gap: mobile ? 8 : 12, justifyContent: "center",
+                boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px", borderRadius: 16, background: "rgba(0, 0, 0, 0.1)"
+            }}>
+                {data.sources.map((source: string) => (
+                    <div key={source} style={{background:"#fff", boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px", borderRadius:10, padding:8}}>
+                        <span style={{letterSpacing:mobile ? 0 : 1}}>{source}</span>
+                    </div>
+                ))}
+            </div> </div>}
         </Container>
     </>
 }
